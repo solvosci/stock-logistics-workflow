@@ -2,7 +2,7 @@
 # @author Pierrick Brun <pierrick.brun@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, _
+from odoo import _, api, models
 
 
 class StockPicking(models.Model):
@@ -38,8 +38,7 @@ class StockPicking(models.Model):
 
     def _get_quick_line(self, product):
         return self.env["stock.move"].search(
-            [("product_id", "=", product.id), ("picking_id", "=", self.id)],
-            limit=1,
+            [("product_id", "=", product.id), ("picking_id", "=", self.id)], limit=1,
         )
 
     def _get_quick_line_qty_vals(self, product):

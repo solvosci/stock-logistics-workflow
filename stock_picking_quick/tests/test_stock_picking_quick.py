@@ -1,8 +1,7 @@
 # @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
-from odoo.tests.common import Form
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestQuickPicking(TransactionCase):
@@ -10,9 +9,7 @@ class TestQuickPicking(TransactionCase):
         super(TestQuickPicking, self).setUp()
         # Useful models
         self.Picking = self.env["stock.picking"]
-        self.location_id = self.env.ref(
-            "stock.warehouse0"
-        ).wh_output_stock_loc_id
+        self.location_id = self.env.ref("stock.warehouse0").wh_output_stock_loc_id
         self.dest_loc = self.env.ref("stock.stock_location_customers")
         self.product_id_1 = self.env.ref("product.product_product_8")
         self.product_id_2 = self.env.ref("product.product_product_11")
@@ -39,9 +36,7 @@ class TestQuickPicking(TransactionCase):
         )
         self.product_id_2.with_context(self.default_cont).qty_to_process = 6.0
         self.assertEqual(
-            len(self.picking.move_ids_without_package),
-            2,
-            "Stock move count must be 2",
+            len(self.picking.move_ids_without_package), 2, "Stock move count must be 2",
         )
         # test stock move qty
         for line in self.picking.move_ids_without_package:
@@ -54,9 +49,7 @@ class TestQuickPicking(TransactionCase):
         self.product_id_1.with_context(self.default_cont).qty_to_process = 3.0
         self.product_id_2.with_context(self.default_cont).qty_to_process = 2.0
         self.assertEqual(
-            len(self.picking.move_ids_without_package),
-            2,
-            "Stock move count must be 2",
+            len(self.picking.move_ids_without_package), 2, "Stock move count must be 2",
         )
         # test stock move qty after update
         for line in self.picking.move_ids_without_package:
@@ -67,12 +60,8 @@ class TestQuickPicking(TransactionCase):
 
     def test_add_product_action_opened(self):
         product_act_from_picking = self.picking.add_product()
-        self.assertEqual(
-            product_act_from_picking["type"], "ir.actions.act_window"
-        )
-        self.assertEqual(
-            product_act_from_picking["res_model"], "product.product"
-        )
+        self.assertEqual(product_act_from_picking["type"], "ir.actions.act_window")
+        self.assertEqual(product_act_from_picking["res_model"], "product.product")
         self.assertEqual(product_act_from_picking["view_mode"], "tree")
         self.assertEqual(product_act_from_picking["target"], "current")
         self.assertEqual(
