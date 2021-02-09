@@ -4,3 +4,7 @@ Akretion
 * Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 * Pierrick Brun <pierrick.brun@akretion.com>
 * David Béal <david.beal@akretion.com>
+
+Solvos
+
+* David Alonso <david.alonso@solvos.es>

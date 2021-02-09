@@ -9,7 +9,6 @@ class StockPicking(models.Model):
     _name = "stock.picking"
     _inherit = ["stock.picking", "product.mass.addition"]
 
-    @api.multi
     def add_product(self):
         self.ensure_one()
         res = self._common_action_keys()
@@ -28,6 +27,8 @@ class StockPicking(models.Model):
         res["search_view_id"] = (
             self.env.ref("stock_picking_quick.product_search_view4picking").id,
         )
+        print("Res")
+        print(res)
         return res
 
     def _prepare_quick_line(self, product):

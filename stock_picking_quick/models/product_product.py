@@ -16,7 +16,7 @@ class ProductProduct(models.Model):
         help="Technical: used to compute quantities to pick.",
     )
 
-    @api.depends("move_ids")
+    # @api.depends("move_ids")
     def _compute_process_qty(self):
         res = super(ProductProduct, self)._compute_process_qty()
         if self.env.context.get("parent_model", False) == "stock.picking":
@@ -32,6 +32,11 @@ class ProductProduct(models.Model):
                 for qty in quantities:
                     if product.id == qty["product_id"][0]:
                         product.qty_to_process = qty["product_qty"]
+                    else:
+                        product.qty_to_process = 0
+        else:
+            for product in self:
+                product.qty_to_process = 0
         return res
 
     @api.model
